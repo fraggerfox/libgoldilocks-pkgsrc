@@ -1,0 +1,10 @@
+libgoldilocks library is a production library, providing the ed448
+elliptic curve. It is based on Mike Hamburg's libdecaf library:
+ed448goldilocks.
+
+This library is intended for developers who have experience with
+cryptography. It doesn't (yet?) include documentation on how to use
+digital signatures or key exchange securely. Consult your local
+cryptographer for advice.
+
+libgoldilocks is currently used by otrv4.

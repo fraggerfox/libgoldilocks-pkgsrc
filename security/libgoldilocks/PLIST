@@ -1,0 +1,16 @@
+@comment $NetBSD$
+include/goldilocks.h
+include/goldilocks.hxx
+include/goldilocks/common.h
+include/goldilocks/ed448.h
+include/goldilocks/ed448.hxx
+include/goldilocks/eddsa.hxx
+include/goldilocks/point_448.h
+include/goldilocks/point_448.hxx
+include/goldilocks/secure_buffer.hxx
+include/goldilocks/shake.h
+include/goldilocks/shake.hxx
+include/goldilocks/spongerng.h
+include/goldilocks/spongerng.hxx
+lib/libgoldilocks.la
+lib/pkgconfig/libgoldilocks.pc
