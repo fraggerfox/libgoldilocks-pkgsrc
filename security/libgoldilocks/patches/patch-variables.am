@@ -1,0 +1,16 @@
+$NetBSD$
+
+This is required to enable builds in i386 architecture.
+
+The upstream as of now "hardcodes" amd64 (x86_64) as the only build option.
+
+ARCH_NAME is now set from configure.ac
+
+--- variables.am.orig	2019-03-11 19:42:59.000000000 +0000
++++ variables.am
+@@ -1,5 +1,3 @@
+-ARCH_NAME = arch_x86_64
+-
+ LANGFLAGS = -std=c99 -fno-strict-aliasing
+ 
+ WARNFLAGS = -pedantic -Wall -Wextra -Werror -Wunreachable-code \

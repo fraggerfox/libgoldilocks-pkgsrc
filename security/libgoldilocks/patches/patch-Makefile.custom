@@ -1,0 +1,46 @@
+$NetBSD$
+
+This is required to enable builds in i386 architecture.
+
+The upstream as of now "hardcodes" amd64 (x86_64) as the only build option.
+
+ARCH_NAME is now set from configure.ac
+
+--- Makefile.custom.orig	2019-03-11 19:42:59.000000000 +0000
++++ Makefile.custom
+@@ -34,7 +34,7 @@ PYTHON ?= python
+ WARNFLAGS = -pedantic -Wall -Wextra -Werror -Wunreachable-code \
+ 	 -Wmissing-declarations -Wunused-function -Wno-overlength-strings $(EXWARN)
+ 
+-INCFLAGS = -Isrc -Isrc/include -I$(BUILD_INC) -Isrc/include/arch_x86_64 -Isrc/arch_x86_64
++INCFLAGS = -Isrc -Isrc/include -I$(BUILD_INC) -Isrc/include/$(ARCH_NAME) -Isrc/$(ARCH_NAME)
+ PUB_INCFLAGS = -I$(BUILD_INC)
+ LANGFLAGS = -std=c99 -fno-strict-aliasing
+ LANGXXFLAGS = -fno-strict-aliasing
+@@ -120,11 +120,11 @@ $(BUILD_C)/decaf_tables.c: $(BUILD_IBIN)
+ 
+ $(BUILD_OBJ)/%.o: $(BUILD_C)/%.c $(HEADERS)
+ 	$(CC) $(CFLAGS) -c -o $@ $< \
+-		-I build/obj/ -I src/ -I src/arch_x86_64 -I src/include/arch_x86_64
++		-I build/obj/ -I src/ -I src/$(ARCH_NAME) -I src/include/$(ARCH_NAME)
+ 
+ $(BUILD_OBJ)/goldilocks_gen_tables.o: src/goldilocks_gen_tables.c $(HEADERS)
+ 	$(CC) $(CFLAGS) \
+-		-I build/obj/ -I src -I src/arch_x86_64 -I src/include/arch_x86_64 \
++		-I build/obj/ -I src -I src/$(ARCH_NAME) -I src/include/$(ARCH_NAME) \
+ 		-c -o $@ $<
+ 
+ 
+@@ -152,10 +152,10 @@ else
+ endif
+ 
+ # $(BUILD_OBJ)/%.o: src/%.c $(HEADERS)
+-# 	$(CC) $(CFLAGS) -I src/arch_x86_64 -I src/include/arch_x86_64 \
++# 	$(CC) $(CFLAGS) -I src/$(ARCH_NAME) -I src/include/$(ARCH_NAME) \
+ # 	-c -o $@ $<
+ 
+-$(BUILD_OBJ)/%.o: src/arch_x86_64/%.c $(HEADERS)
++$(BUILD_OBJ)/%.o: src/$(ARCH_NAME)/%.c $(HEADERS)
+ 	$(CC) $(CFLAGS) -c -o $@ $<
+ 
+ $(BUILD_OBJ)/%.o: src/%.c $(HEADERS)
