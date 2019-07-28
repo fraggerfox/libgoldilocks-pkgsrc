@@ -1,6 +1,6 @@
 # $NetBSD$
 
-DISTNAME=	libgoldilocks-0.0.0
+DISTNAME=	libgoldilocks-0.0.0.20190311
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=otrv4/}
 GITHUB_TAG=	c8d994098ff9094e3021f1a01e43faa3c6cf6fe4
