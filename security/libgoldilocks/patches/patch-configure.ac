@@ -1,23 +1,18 @@
 $NetBSD$
 
 This is required to enable builds in architectures other than amd64
-(x86_64). Currently supports i386/armv6/armv7.
+(x86_64). Currently supports i386/armv6/armv7/aarch64.
 
 The upstream as of now "hardcodes" amd64 (x86_64) as the only build
 option.
 
 Now it does a host CPU check and picks the architecture accordingly.
 
-XXX: Should we add arm / aarch64? Since the library has the means to
-support it?
-
-XXX: What is the difference between arm_32 and arm_neon?
-
-XXX: Is arm cpu detection correct?
+XXX: What is the usecase of arch_neon?
 
 --- configure.ac.orig	2019-03-11 19:42:59.000000000 +0000
 +++ configure.ac
-@@ -12,6 +12,22 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign 
+@@ -12,6 +12,23 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign 
  AM_PROG_AR
  LT_INIT
  
@@ -30,6 +25,7 @@ XXX: Is arm cpu detection correct?
 +  [amd64], [ARCH_NAME=arch_x86_64],
 +  [armv6], [ARCH_NAME=arch_arm_32],
 +  [armv7], [ARCH_NAME=arch_arm_32],
++  [aarch64], [ARCH_NAME=arch_ref64],
 +  [AC_MSG_ERROR("No assembler code for CPU $host_cpu")]
 +)
 +
