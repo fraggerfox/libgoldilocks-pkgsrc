@@ -1,6 +1,6 @@
 $NetBSD$
 
-This is required to enable builds in i386 architecture.
+This is required to enable builds in architecture other than x86_64.
 
 The upstream as of now "hardcodes" amd64 (x86_64) as the only build option.
 

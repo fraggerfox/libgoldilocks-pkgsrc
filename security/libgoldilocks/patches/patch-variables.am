@@ -1,8 +1,10 @@
 $NetBSD$
 
-This is required to enable builds in i386 architecture.
+This is required to enable builds in architectures other than x86_64.
 
 The upstream as of now "hardcodes" amd64 (x86_64) as the only build option.
+
+Moved x86 specific ARCHFLAGS to Makefile.common
 
 ARCH_NAME is now set from configure.ac
 
@@ -14,3 +16,13 @@ ARCH_NAME is now set from configure.ac
  LANGFLAGS = -std=c99 -fno-strict-aliasing
  
  WARNFLAGS = -pedantic -Wall -Wextra -Werror -Wunreachable-code \
+@@ -15,8 +13,7 @@ INCFLAGS += -I$(top_srcdir)/src/include/
+ 
+ OFLAGS ?= -O2
+ 
+-ARCHFLAGS = -maes # -mavx2 -mbmi2 #TODO
+-ARCHFLAGS += $(XARCHFLAGS)
++ARCHFLAGS = $(XARCHFLAGS)
+ GENFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -fomit-frame-pointer -fPIC
+ 
+ LANGXXFLAGS = -fno-strict-aliasing
