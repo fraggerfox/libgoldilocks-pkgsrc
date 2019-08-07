@@ -10,22 +10,7 @@ ARCH_NAME is now set from configure.ac
 
 --- Makefile.custom.orig	2019-03-11 19:42:59.000000000 +0000
 +++ Makefile.custom
-@@ -18,6 +18,14 @@ BUILD_IBIN = build/obj/bin
- 
- DOXYGEN ?= doxygen
- 
-+ifeq ($(ARCH_NAME),arch_x86_64)
-+ARCHFLAGS += -maes # -mavx2 -mbmi2 #TODO
-+endif
-+
-+ifeq ($(ARCH_NAME),arch_32)
-+ARCHFLAGS += -maes # -mavx2 -mbmi2 #TODO
-+endif
-+
- ifeq ($(UNAME),Darwin)
- CC = clang
- CXX = clang++
-@@ -34,7 +42,7 @@ PYTHON ?= python
+@@ -34,7 +34,7 @@ PYTHON ?= python
  WARNFLAGS = -pedantic -Wall -Wextra -Werror -Wunreachable-code \
  	 -Wmissing-declarations -Wunused-function -Wno-overlength-strings $(EXWARN)
  
@@ -34,7 +19,7 @@ ARCH_NAME is now set from configure.ac
  PUB_INCFLAGS = -I$(BUILD_INC)
  LANGFLAGS = -std=c99 -fno-strict-aliasing
  LANGXXFLAGS = -fno-strict-aliasing
-@@ -120,11 +128,11 @@ $(BUILD_C)/decaf_tables.c: $(BUILD_IBIN)
+@@ -120,11 +120,11 @@ $(BUILD_C)/decaf_tables.c: $(BUILD_IBIN)
  
  $(BUILD_OBJ)/%.o: $(BUILD_C)/%.c $(HEADERS)
  	$(CC) $(CFLAGS) -c -o $@ $< \
@@ -48,7 +33,7 @@ ARCH_NAME is now set from configure.ac
  		-c -o $@ $<
  
  
-@@ -152,10 +160,10 @@ else
+@@ -152,10 +152,10 @@ else
  endif
  
  # $(BUILD_OBJ)/%.o: src/%.c $(HEADERS)

@@ -15,7 +15,7 @@ XXX: Is arm cpu detection correct?
 
 --- configure.ac.orig	2019-03-11 19:42:59.000000000 +0000
 +++ configure.ac
-@@ -12,6 +12,20 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign 
+@@ -12,6 +12,22 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign 
  AM_PROG_AR
  LT_INIT
  
@@ -32,6 +32,8 @@ XXX: Is arm cpu detection correct?
 +)
 +
 +AC_SUBST([ARCH_NAME])
++
++AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_NAME" = xarch_x86_64] || [test "x$ARCH_NAME" = xarch_32])
 +
  dnl Checks for programs.
  AC_PROG_CXX

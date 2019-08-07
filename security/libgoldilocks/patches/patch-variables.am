@@ -16,13 +16,16 @@ ARCH_NAME is now set from configure.ac
  LANGFLAGS = -std=c99 -fno-strict-aliasing
  
  WARNFLAGS = -pedantic -Wall -Wextra -Werror -Wunreachable-code \
-@@ -15,8 +13,7 @@ INCFLAGS += -I$(top_srcdir)/src/include/
+@@ -15,8 +13,10 @@ INCFLAGS += -I$(top_srcdir)/src/include/
  
  OFLAGS ?= -O2
  
 -ARCHFLAGS = -maes # -mavx2 -mbmi2 #TODO
 -ARCHFLAGS += $(XARCHFLAGS)
 +ARCHFLAGS = $(XARCHFLAGS)
++if ARCH_X86
++ARCHFLAGS += -maes
++endif
  GENFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -fomit-frame-pointer -fPIC
  
  LANGXXFLAGS = -fno-strict-aliasing
