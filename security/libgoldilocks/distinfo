@@ -4,7 +4,7 @@ SHA1 (libgoldilocks-0.0.0.20190311-c8d994098ff9094e3021f1a01e43faa3c6cf6fe4.tar.
 RMD160 (libgoldilocks-0.0.0.20190311-c8d994098ff9094e3021f1a01e43faa3c6cf6fe4.tar.gz) = 396c71742ad6da3701e06daabc6332fd051753ed
 SHA512 (libgoldilocks-0.0.0.20190311-c8d994098ff9094e3021f1a01e43faa3c6cf6fe4.tar.gz) = 4b80182360306696c5ee4f70181d10509761d2e1a877f9a6715cb88661fb35ec41f12d08affcb9a495d1d6a5938df04a5f08515c6944aed2d645432863bac361
 Size (libgoldilocks-0.0.0.20190311-c8d994098ff9094e3021f1a01e43faa3c6cf6fe4.tar.gz) = 168377 bytes
-SHA1 (patch-Makefile.custom) = e7fe2a68d526a2c27469432004f36250a7b09d8e
-SHA1 (patch-configure.ac) = 2569c7817b746cefb0050d08920b67b08a7e1b8c
-SHA1 (patch-src_Makefile.am) = 49afe18f6e7f7d050e9016e98c1d0276a8ed17ca
-SHA1 (patch-variables.am) = 30db45a80a4487c65cdb632b1c5d754e42f2a74f
+SHA1 (patch-Makefile.custom) = 7f3c651b63889c70fcd4949362cc623136d7b145
+SHA1 (patch-configure.ac) = 34acb10c8556d75ea31a6441a4edf6b52b9a2c56
+SHA1 (patch-src_Makefile.am) = 47f2f45d6e16cf3cb3858678c8a9d384ba17f29e
+SHA1 (patch-variables.am) = 4133619c525820970b2d0b9ab364f2b4d56b6e29

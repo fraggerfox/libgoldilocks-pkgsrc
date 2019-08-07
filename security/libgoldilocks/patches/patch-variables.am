@@ -1,10 +1,10 @@
 $NetBSD$
 
-This is required to enable builds in architectures other than x86_64.
+This is required to enable builds in architectures other than amd64
+(x86_64). Currently supports i386/armv6/armv7.
 
-The upstream as of now "hardcodes" amd64 (x86_64) as the only build option.
-
-Moved x86 specific ARCHFLAGS to Makefile.common
+The upstream as of now "hardcodes" amd64 (x86_64) as the only build
+option.
 
 ARCH_NAME is now set from configure.ac
 
@@ -24,7 +24,7 @@ ARCH_NAME is now set from configure.ac
 -ARCHFLAGS += $(XARCHFLAGS)
 +ARCHFLAGS = $(XARCHFLAGS)
 +if ARCH_X86
-+ARCHFLAGS += -maes
++ARCHFLAGS += -maes # -mavx2 -mbmi2 #TODO
 +endif
  GENFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -fomit-frame-pointer -fPIC
  
