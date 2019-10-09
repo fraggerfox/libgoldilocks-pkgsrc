@@ -20,6 +20,6 @@ GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
 
 pre-configure:
-	cd ${WRKSRC} && autoreconf -vif
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} autoreconf -vif
 
 .include "../../mk/bsd.pkg.mk"
