@@ -1,38 +1,36 @@
 $NetBSD$
 
-This is required to enable builds in architectures other than amd64
-(x86_64). Currently supports i386/armv6/armv7/aarch64.
+Better arch detection.
 
-The upstream as of now "hardcodes" amd64 (x86_64) as the only build
-option.
-
-Now it does a host CPU check and picks the architecture accordingly.
-
-XXX: What is the usecase of arch_neon?
-
---- configure.ac.orig	2019-03-11 19:42:59.000000000 +0000
+--- configure.ac.orig	2019-12-04 21:55:31.000000000 +0000
 +++ configure.ac
-@@ -12,6 +12,23 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign 
- AM_PROG_AR
- LT_INIT
+@@ -41,17 +41,23 @@ AC_CHECK_FUNCS([gettimeofday memmove mem
  
+ AC_CANONICAL_HOST
+ 
+-# default target arch is arch_32 which shall be generic enough to compile mostly on anything
+-# target arch dirs:
+-# availables: arch_32, arch_arm_32, arch_neon, arch_ref64, arch_x86_64
 +dnl Check the machine architecture.
 +AC_CANONICAL_HOST
 +
-+AS_CASE([$host_cpu],
-+  [i?86], [ARCH_NAME=arch_32],
-+  [x86_64], [ARCH_NAME=arch_x86_64],
-+  [amd64], [ARCH_NAME=arch_x86_64],
-+  [armv6], [ARCH_NAME=arch_arm_32],
-+  [armv7], [ARCH_NAME=arch_arm_32],
-+  [aarch64], [ARCH_NAME=arch_ref64],
+ AS_CASE([$host_cpu],
++  [i?86], [ARCH_DIR=arch_32],
+   [x86_64], [ARCH_DIR=arch_x86_64],
+-  [arch64], [ARCH_DIR=arch_ref64],
+-  [arm], [ARCH_DIR=arch_neon],
+-  [ARCH_DIR=arch_32]
++  [amd64], [ARCH_DIR=arch_x86_64],
++  [armv6], [ARCH_DIR=arch_arm_32],
++  [armv7], [ARCH_DIR=arch_arm_32],
++  [aarch64], [ARCH_DIR=arch_ref64],
 +  [AC_MSG_ERROR("No assembler code for CPU $host_cpu")]
-+)
+ )
 +
-+AC_SUBST([ARCH_NAME])
+ AC_SUBST([ARCH_DIR])
+ 
++AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_DIR" = xarch_x86_64] || [test "x$ARCH_DIR" = xarch_32])
 +
-+AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_NAME" = xarch_x86_64] || [test "x$ARCH_NAME" = xarch_32])
-+
- dnl Checks for programs.
- AC_PROG_CXX
- AC_PROG_CC
+ AX_CFLAGS_GCC_OPTION([-Wall])
+ AX_CFLAGS_GCC_OPTION([-Wextra])
+ AX_CFLAGS_GCC_OPTION([-Werror])

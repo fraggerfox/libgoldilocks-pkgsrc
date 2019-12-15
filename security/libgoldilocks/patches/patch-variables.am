@@ -1,22 +1,19 @@
 $NetBSD$
 
-This is required to enable builds in architectures other than amd64
-(x86_64). Currently supports i386/armv6/armv7/aarch64.
+Enable X86 flags only for that architecture.
 
-The upstream as of now "hardcodes" amd64 (x86_64) as the only build
-option.
+Set ARCH_DEF here.
 
-ARCH_NAME is now set from configure.ac
-
---- variables.am.orig	2019-03-11 19:42:59.000000000 +0000
+--- variables.am.orig	2019-12-04 21:55:31.000000000 +0000
 +++ variables.am
-@@ -1,5 +1,3 @@
--ARCH_NAME = arch_x86_64
--
- LANGFLAGS = -std=c99 -fno-strict-aliasing
+@@ -1,5 +1,6 @@
+ # Another arch can be forced here
+ ARCH_NAME = $(ARCH_DIR)
++ARCH_DEF = $(ARCH_DIR)
  
- WARNFLAGS = -pedantic -Wall -Wextra -Werror -Wunreachable-code \
-@@ -15,8 +13,10 @@ INCFLAGS += -I$(top_srcdir)/src/include/
+ LANGFLAGS = -std=c99 -fno-strict-aliasing
+ LANGXXFLAGS = -fno-strict-aliasing
+@@ -13,6 +14,8 @@ INCFLAGS += -I$(top_srcdir)/src/include/
  
  OFLAGS ?= -O2
  
@@ -27,5 +24,3 @@ ARCH_NAME is now set from configure.ac
 +ARCHFLAGS += -maes # -mavx2 -mbmi2 #TODO
 +endif
  GENFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -fomit-frame-pointer -fPIC
- 
- LANGXXFLAGS = -fno-strict-aliasing
