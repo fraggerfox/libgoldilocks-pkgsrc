@@ -11,7 +11,7 @@ HOMEPAGE=	https://otr.im/
 COMMENT=	Library providing the ed448 elliptic curve
 LICENSE=	mit
 
-USE_TOOLS+=	autoconf automake gmake m4 pkg-config
+USE_TOOLS+=	autoreconf autoconf automake gmake m4 pkg-config
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
 
