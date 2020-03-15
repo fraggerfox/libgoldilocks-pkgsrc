@@ -3,28 +3,71 @@ $NetBSD$
 This is required to enable builds in architectures other than amd64
 (x86_64). Currently supports i386/armv6/armv7/aarch64.
 
-The upstream as of now "hardcodes" amd64 (x86_64) as the only build
-option.
+Do a better refactor of upstream's arch detection.
 
 ARCH_DIR is now set from configure.ac
 
---- src/Makefile.am.orig	2019-12-15 09:28:46.501083787 +0000
+--- src/Makefile.am.orig	2020-03-15 07:17:34.000000000 +0000
 +++ src/Makefile.am
-@@ -4,7 +4,7 @@ noinst_PROGRAMS = goldilocks_gen_tables
+@@ -2,21 +2,13 @@ include $(top_srcdir)/variables.am
  
- goldilocks_gen_tables_SOURCES = utils.c \
- 					   goldilocks_gen_tables.c \
--					   arch_x86_64/f_impl.c \
-+					   $(ARCH_DIR)/f_impl.c \
- 	       			   f_arithmetic.c \
- 	       			   f_generic.c \
- 	      			   goldilocks.c \
-@@ -22,7 +22,7 @@ lib_LTLIBRARIES = libgoldilocks.la
- libgoldilocks_la_SOURCES = utils.c \
- 		      shake.c \
- 		      spongerng.c \
--		      arch_x86_64/f_impl.c \
-+		      $(ARCH_DIR)/f_impl.c \
- 		      f_arithmetic.c \
- 		      f_generic.c \
- 		      goldilocks.c \
+ noinst_PROGRAMS = goldilocks_gen_tables
+ 
+-if X86
+-goldilocks_gen_tables_SOURCES = utils.c goldilocks_gen_tables.c arch_x86_64/f_impl.c f_arithmetic.c f_generic.c goldilocks.c scalar.c
+-endif
+-
+-if ARCH_64
+-goldilocks_gen_tables_SOURCES = utils.c goldilocks_gen_tables.c arch_ref64/f_impl.c f_arithmetic.c f_generic.c goldilocks.c scalar.c
+-endif
+-
+-if ARCH_ARM_32
+-goldilocks_gen_tables_SOURCES = utils.c goldilocks_gen_tables.c arch_arm_32/f_impl.c f_arithmetic.c f_generic.c goldilocks.c scalar.c
+-endif
+-
+-if ARCH_32
+-goldilocks_gen_tables_SOURCES = utils.c goldilocks_gen_tables.c arch_32/f_impl.c f_arithmetic.c f_generic.c goldilocks.c scalar.c
+-endif
++goldilocks_gen_tables_SOURCES = utils.c \
++				goldilocks_gen_tables.c \
++				${ARCH_DIR}/f_impl.c \
++				f_arithmetic.c \
++				f_generic.c \
++				goldilocks.c \
++				scalar.c
+ 
+ goldilocks_gen_tables_CFLAGS = $(AM_CFLAGS) $(LANGFLAGS) $(WARNFLAGS) $(INCFLAGS) $(INCFLAGS_448) $(OFLAGS) $(ARCHFLAGS) $(GENFLAGS) $(XCFLAGS)
+ goldilocks_gen_tables_LDFLAGS = $(AM_LDFLAGS) $(XLDFLAGS)
+@@ -27,21 +19,17 @@ GEN/goldilocks_tables.c: goldilocks_gen_
+ 
+ lib_LTLIBRARIES = libgoldilocks.la
+ 
+-if X86
+-libgoldilocks_la_SOURCES = utils.c shake.c spongerng.c arch_x86_64/f_impl.c f_arithmetic.c f_generic.c goldilocks.c elligator.c scalar.c eddsa.c GEN/goldilocks_tables.c
+-endif
+-
+-if ARCH_64
+-libgoldilocks_la_SOURCES = utils.c shake.c spongerng.c arch_ref64/f_impl.c f_arithmetic.c f_generic.c goldilocks.c elligator.c scalar.c eddsa.c GEN/goldilocks_tables.c
+-endif
+-
+-if ARCH_ARM_32
+-libgoldilocks_la_SOURCES = utils.c shake.c spongerng.c arch_arm_32/f_impl.c f_arithmetic.c f_generic.c goldilocks.c elligator.c scalar.c eddsa.c GEN/goldilocks_tables.c
+-endif
+-
+-if ARCH_32
+-libgoldilocks_la_SOURCES = utils.c shake.c spongerng.c arch_32/f_impl.c f_arithmetic.c f_generic.c goldilocks.c elligator.c scalar.c eddsa.c GEN/goldilocks_tables.c
+-endif
++libgoldilocks_la_SOURCES = utils.c \
++			shake.c \
++			spongerng.c \
++			${ARCH_DIR}/f_impl.c \
++			f_arithmetic.c \
++			f_generic.c \
++			goldilocks.c \
++			elligator.c \
++			scalar.c \
++			eddsa.c \
++			GEN/goldilocks_tables.c
+ 
+ libgoldilocks_la_CFLAGS = $(AM_CFLAGS) $(LANGFLAGS) $(WARNFLAGS) $(INCFLAGS) $(OFLAGS) $(ARCHFLAGS) $(GENFLAGS) $(XCFLAGS)
+ libgoldilocks_la_LDFLAGS = $(AM_LDFLAGS) $(XLDFLAGS)

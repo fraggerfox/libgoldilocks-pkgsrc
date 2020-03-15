@@ -4,7 +4,7 @@ Enable X86 flags only for that architecture.
 
 Set ARCH_DEF here.
 
---- variables.am.orig	2019-12-04 21:55:31.000000000 +0000
+--- variables.am.orig	2020-03-15 07:17:34.000000000 +0000
 +++ variables.am
 @@ -1,5 +1,6 @@
  # Another arch can be forced here
@@ -13,14 +13,14 @@ Set ARCH_DEF here.
  
  LANGFLAGS = -std=c99 -fno-strict-aliasing
  LANGXXFLAGS = -fno-strict-aliasing
-@@ -13,6 +14,8 @@ INCFLAGS += -I$(top_srcdir)/src/include/
+@@ -13,8 +14,8 @@ INCFLAGS += -I$(top_srcdir)/src/include/
  
  OFLAGS ?= -O2
  
--ARCHFLAGS = -maes # -mavx2 -mbmi2 #TODO
--ARCHFLAGS += $(XARCHFLAGS)
-+ARCHFLAGS = $(XARCHFLAGS)
+-if X86
+-ARCHFLAGS = -maes -mavx2 -mbmi2 #TODO
 +if ARCH_X86
-+ARCHFLAGS += -maes # -mavx2 -mbmi2 #TODO
-+endif
- GENFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -fomit-frame-pointer -fPIC
++ARCHFLAGS = -maes #-mavx2 -mbmi2 #TODO
+ else
+ ARCHFLAGS = # -mavx2 -mbmi2 #TODO
+ endif

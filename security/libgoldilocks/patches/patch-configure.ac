@@ -2,32 +2,49 @@ $NetBSD$
 
 Better arch detection.
 
---- configure.ac.orig	2019-12-04 21:55:31.000000000 +0000
+Also remove useless variables.
+
+--- configure.ac.orig	2020-03-15 07:17:34.000000000 +0000
 +++ configure.ac
-@@ -41,17 +41,23 @@ AC_CHECK_FUNCS([gettimeofday memmove mem
- 
- AC_CANONICAL_HOST
- 
--# default target arch is arch_32 which shall be generic enough to compile mostly on anything
--# target arch dirs:
--# availables: arch_32, arch_arm_32, arch_neon, arch_ref64, arch_x86_64
+@@ -44,34 +44,32 @@ AC_CANONICAL_HOST
+ # default target arch is arch_32 which shall be generic enough to compile mostly on anything
+ # target arch dirs:
+ # availables: arch_32, arch_arm_32, arch_neon, arch_ref64, arch_x86_64
 +dnl Check the machine architecture.
-+AC_CANONICAL_HOST
-+
  AS_CASE([$host_cpu],
-+  [i?86], [ARCH_DIR=arch_32],
-   [x86_64], [ARCH_DIR=arch_x86_64],
+-  [ia64|mips64|mips64eb|mipseb64|mips64el|mipsel64|mips64*|powerpc64*|sparc64|x86_64], [ARCH_DIR=arch_x86_64],
 -  [arch64], [ARCH_DIR=arch_ref64],
--  [arm], [ARCH_DIR=arch_neon],
+-  [arm], [ARCH_DIR=arch_arm_32],
 -  [ARCH_DIR=arch_32]
-+  [amd64], [ARCH_DIR=arch_x86_64],
-+  [armv6], [ARCH_DIR=arch_arm_32],
-+  [armv7], [ARCH_DIR=arch_arm_32],
++  [i?86], [ARCH_DIR=arch_32],
++  [x86_64|amd64], [ARCH_DIR=arch_x86_64],
++  [armv6|armv7], [ARCH_DIR=arch_arm_32],
 +  [aarch64], [ARCH_DIR=arch_ref64],
 +  [AC_MSG_ERROR("No assembler code for CPU $host_cpu")]
  )
-+
  AC_SUBST([ARCH_DIR])
+ 
+ AS_IF([test "x$ARCH_DIR" = "xarch_x86_64"], [needx64=yes],
+     [test "x$ARCH_DIR" != "xarch_x86_64"], [needx64=no])
+ 
+-AM_CONDITIONAL([X86], [test "x$needx64" = "xyes"])
+-
+-AS_IF([test "x$ARCH_DIR" = "xarch_64"], [need64=yes],
+-    [test "x$ARCH_DIR" != "xarch_64"], [need64=no])
+-
+-AM_CONDITIONAL([ARCH_64], [test "x$need64" = "xyes"])
++AS_IF([test "x$ARCH_DIR" = "xarch_ref64"], [need64=yes],
++    [test "x$ARCH_DIR" != "xarch_ref64"], [need64=no])
+ 
+ AS_IF([test "x$ARCH_DIR" = "xarch_arm_32"], [needarm32=yes],
+     [test "x$ARCH_DIR" != "xarch_arm_32"], [needarm32=no])
+ 
+-AM_CONDITIONAL([ARCH_ARM_32], [test "x$needarm32" = "xyes"])
+-
+ AS_IF([test "x$ARCH_DIR" = "xarch_32"], [need32=yes],
+     [test "x$ARCH_DIR" != "xarch_32"], [need32=no])
+ 
+ AM_CONDITIONAL([ARCH_32], [test "x$need32" = "xyes"])
  
 +AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_DIR" = xarch_x86_64] || [test "x$ARCH_DIR" = xarch_32])
 +

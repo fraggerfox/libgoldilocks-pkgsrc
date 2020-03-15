@@ -4,9 +4,9 @@ Do not use uname(1) to detect architecture.
 
 ARCH_DEF is now set from variables.am
 
---- Makefile.custom.orig	2019-12-15 09:27:58.759145863 +0000
+--- Makefile.custom.orig	2020-03-15 07:17:34.000000000 +0000
 +++ Makefile.custom
-@@ -2,23 +2,6 @@
+@@ -2,22 +2,6 @@
  # Copyright (c) 2018 the libgoldilocks contributors.
  # Released under the MIT License.  See LICENSE.txt for license information.
  
@@ -23,9 +23,8 @@ ARCH_DEF is now set from variables.am
 -ARCH_DEF = arch_ref64
 -endif
 -
--ifeq ($(ARCH),arm)
--ARCH_DEF := arch_arm_32
--endif
+-$(info    ARCH_DEF is $(ARCH_DEF))
+-$(info    ARCH is $(ARCH))
 -
  # Subdirectories for objects etc.
  # Many of them are mapped to build/obj right now, but could be split later.
