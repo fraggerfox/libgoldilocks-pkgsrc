@@ -1,10 +1,10 @@
 $NetBSD: distinfo,v 1.12 2016/03/09 18:04:17 gdt Exp $
 
-SHA1 (libgoldilocks-0.0.0.20200315-fa5fdf7e73ec26866a0f46207f8b6b6785c775ac.tar.gz) = d9800d3bad0b6531cc3676520d8ff24a8769733e
-RMD160 (libgoldilocks-0.0.0.20200315-fa5fdf7e73ec26866a0f46207f8b6b6785c775ac.tar.gz) = 2ce1d441400d2e8c989150e1ae2407dc6c449e44
-SHA512 (libgoldilocks-0.0.0.20200315-fa5fdf7e73ec26866a0f46207f8b6b6785c775ac.tar.gz) = a5cd7dc119b9629c6dad88ff85c82ff7604b2d9f483511b34b41f09fb2d81bd54620cf5c1ca300e7211a0efce6bc870a28021de9eed3dd7a600ceddcb73c0453
-Size (libgoldilocks-0.0.0.20200315-fa5fdf7e73ec26866a0f46207f8b6b6785c775ac.tar.gz) = 141692 bytes
-SHA1 (patch-Makefile.custom) = e42daf97c28db29d039f2ccd48c297f728139f19
-SHA1 (patch-configure.ac) = c9f7c449ae38c3ff8a94ddaf64f20186d220e3a7
-SHA1 (patch-src_Makefile.am) = 8a33628aca88f72827bbe1ae88de7e15513854e8
+SHA1 (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.tar.gz) = 3a41588af6531a9ae9b405a84995a26243cf334a
+RMD160 (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.tar.gz) = f10c65d07c20224419576c12559a1aac2e6aa27e
+SHA512 (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.tar.gz) = 20131c27f55300d5e599d8180a27a07c7aa058be380f029edc6d396edc250d6ce7ba86200e1385d2faca2cbc04be41e408a17a1fce4c7b4ca6071a6daf35844f
+Size (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.tar.gz) = 141842 bytes
+SHA1 (patch-Makefile.custom) = 058d9697ec264a5574e38a979ada93dc3b7152fc
+SHA1 (patch-configure.ac) = 2679d801f021fd82dc50af1fec25b0a7e124bdb8
+SHA1 (patch-src_Makefile.am) = 524396d8ad30a30ec2dd30e3c9deafceda07e566
 SHA1 (patch-variables.am) = be4fe76b12de959ad62bebdd276e1952e1236c9c
