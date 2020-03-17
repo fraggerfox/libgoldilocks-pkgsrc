@@ -9,7 +9,7 @@ Also remove useless variables.
 
 --- configure.ac.orig	2020-03-16 08:25:44.000000000 +0000
 +++ configure.ac
-@@ -45,10 +45,11 @@ AC_CANONICAL_HOST
+@@ -45,40 +45,41 @@ AC_CANONICAL_HOST
  # target arch dirs:
  # availables: arch_32, arch_arm_32, arch_neon, arch_ref64, arch_x86_64
  AS_CASE([$host_cpu],
@@ -25,7 +25,17 @@ Also remove useless variables.
    [ARCH_DIR=arch_32]
  )
  
-@@ -58,27 +59,20 @@ AC_SUBST([ARCH_ARM])
++# This is used to enable arch specific flags for x86 CPUS.
++AS_CASE([$host_cpu],
++  [i?86], [ARCH_TYPE=X86],
++  [x86_64|amd64], [ARCH_TYPE=X86],
++  [ARCH_TYPE=non-X86]
++)
++
+ AC_SUBST([ARCH_DIR])
+-AC_SUBST([ARCH_ARM])
++AC_SUBST([ARCH_TYPE])
+ 
  AS_IF([test "x$ARCH_DIR" = "xarch_x86_64"], [needx64=yes],
      [test "x$ARCH_DIR" != "xarch_x86_64"], [needx64=no])
  
@@ -50,7 +60,7 @@ Also remove useless variables.
      [test "x$ARCH_DIR" != "xarch_32"], [need32=no])
  
 -AM_CONDITIONAL([ARCH_32], [test "x$need32" = "xyes"])
-+AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_DIR" = "xarch_ref64"] || [test "x$host_cpu" = "x[i?86]" )
++AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_TYPE" = "xX86"])
 +AM_CONDITIONAL([ARCH_NEON], [test "x$ARCH_DIR" = "xarch_neon"])
  
  AX_CFLAGS_GCC_OPTION([-Wall])
