@@ -3,7 +3,7 @@ $NetBSD$
 Do a better refactor of upstream's arch detection. Instead of blindly
 copy pasting repeated code.
 
-Currently supports i386/armv6/armv7/aarch64.
+Currently supports i386/amd64/armv6/armv7(with neon)/aarch64.
 
 ARCH_DIR is now set from configure.ac
 

@@ -1,12 +1,15 @@
 $NetBSD$
 
-Better arch detection.
+Better arch detection, based on the original libdecaf, from which this
+library is deriverd.
+
+https://sourceforge.net/p/ed448goldilocks/code/ci/master/tree/src/CMakeLists.txt#l49
 
 Also remove useless variables.
 
 --- configure.ac.orig	2020-03-16 08:25:44.000000000 +0000
 +++ configure.ac
-@@ -45,11 +45,11 @@ AC_CANONICAL_HOST
+@@ -45,10 +45,11 @@ AC_CANONICAL_HOST
  # target arch dirs:
  # availables: arch_32, arch_arm_32, arch_neon, arch_ref64, arch_x86_64
  AS_CASE([$host_cpu],
@@ -14,16 +17,15 @@ Also remove useless variables.
 -  [arch64|aarch64|powerpc*], [ARCH_DIR=arch_ref64],
 -  [arm64], [ARCH_DIR=arch_neon],
 -  [arm32|armv*], [ARCH_DIR=arch_arm_32],
--  [ARCH_DIR=arch_32]
 +  [i?86], [ARCH_DIR=arch_32],
 +  [x86_64|amd64], [ARCH_DIR=arch_x86_64],
-+  [armv6|armv7], [ARCH_DIR=arch_arm_32],
++  [armv6], [ARCH_DIR=arch_arm_32],
++  [armv7], [ARCH_DIR=arch_neon],
 +  [aarch64], [ARCH_DIR=arch_ref64],
-+  [AC_MSG_ERROR("No assembler code for CPU $host_cpu")]
+   [ARCH_DIR=arch_32]
  )
  
- AC_SUBST([ARCH_DIR])
-@@ -58,27 +58,19 @@ AC_SUBST([ARCH_ARM])
+@@ -58,27 +59,20 @@ AC_SUBST([ARCH_ARM])
  AS_IF([test "x$ARCH_DIR" = "xarch_x86_64"], [needx64=yes],
      [test "x$ARCH_DIR" != "xarch_x86_64"], [needx64=no])
  
@@ -48,7 +50,8 @@ Also remove useless variables.
      [test "x$ARCH_DIR" != "xarch_32"], [need32=no])
  
 -AM_CONDITIONAL([ARCH_32], [test "x$need32" = "xyes"])
-+AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_DIR" = xarch_x86_64] || [test "x$ARCH_DIR" = xarch_32])
++AM_CONDITIONAL([ARCH_X86], [test "x$ARCH_DIR" = "xarch_ref64"] || [test "x$host_cpu" = "x[i?86]" )
++AM_CONDITIONAL([ARCH_NEON], [test "x$ARCH_DIR" = "xarch_neon"])
  
  AX_CFLAGS_GCC_OPTION([-Wall])
  AX_CFLAGS_GCC_OPTION([-Wextra])
