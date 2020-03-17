@@ -5,6 +5,6 @@ RMD160 (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.ta
 SHA512 (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.tar.gz) = 20131c27f55300d5e599d8180a27a07c7aa058be380f029edc6d396edc250d6ce7ba86200e1385d2faca2cbc04be41e408a17a1fce4c7b4ca6071a6daf35844f
 Size (libgoldilocks-0.0.0.20200316-d07cb5b423995bae1155702aa949846c95d855c1.tar.gz) = 141842 bytes
 SHA1 (patch-Makefile.custom) = 058d9697ec264a5574e38a979ada93dc3b7152fc
-SHA1 (patch-configure.ac) = 5a34a3694c4355d2a580b54b6336d53b4c5d5eb7
+SHA1 (patch-configure.ac) = e585f1d9428feefeb651a9bd47a7fc4ad003c940
 SHA1 (patch-src_Makefile.am) = 274c87eae89094110b060e4f2694cf21f7d9af4c
 SHA1 (patch-variables.am) = c41d3c2af1a1be7ae182e2a326ff7c1c8471eb27
